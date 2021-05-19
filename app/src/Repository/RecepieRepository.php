@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Recepie;
+use App\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Recepie|null find($id, $lockMode = null, $lockVersion = null)
- * @method Recepie|null findOneBy(array $criteria, array $orderBy = null)
- * @method Recepie[]    findAll()
- * @method Recepie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Recipe|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Recipe|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Recipe[]    findAll()
+ * @method Recipe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RecepieRepository extends ServiceEntityRepository
+class RecipeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Recepie::class);
+        parent::__construct($registry, Recipe::class);
     }
 
     // /**
-    //  * @return Recepie[] Returns an array of Recepie objects
+    //  * @return Recipe[] Returns an array of Recipe objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RecepieRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Recepie
+    public function findOneBySomeField($value): ?Recipe
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

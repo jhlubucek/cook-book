@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\RecepieHasCategoryRepository;
+use App\Repository\RecipeHasCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RecepieHasCategoryRepository::class)
+ * @ORM\Entity(repositoryClass=RecipeHasCategoryRepository::class)
  */
-class RecepieHasCategory
+class RecipeHasCategory
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class RecepieHasCategory
     /**
      * @ORM\Column(type="integer")
      */
-    private $recepieId;
+    private $recipeId;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class RecepieHasCategory
         return $this;
     }
 
-    public function getRecepieId(): ?int
+    public function getRecipeId(): ?int
     {
-        return $this->recepieId;
+        return $this->recipeId;
     }
 
-    public function setRecepieId(int $recepieId): self
+    public function setRecipeId(int $recipeId): self
     {
-        $this->recepieId = $recepieId;
+        $this->recipeId = $recipeId;
 
         return $this;
     }

@@ -1,0 +1,40 @@
+.example-wrapper { text-align: center; margin: auto; max-width: 800px; width: 95%;  font: 18px/1.5 sans-serif;}
+
+.title { text-align: center; margin: auto; width: 100%;  font: 18px/1.5 sans-serif; height: 500px;
+    background-color: #ccffff;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-image: url('/assets/images/vegetables-1212845_1920.jpg');
+    }
+
+.title h1 {
+    color: #030303;
+    padding-top: 150px;
+}
+
+.search-bar {
+    width: 500px;
+    margin: 130px auto auto;
+}
+
+
+
+.search-bar input{
+    background-color:rgba(0, 0, 0, 0.3);
+    border: #0a0a0a solid 2px;
+    color: #ffffff;
+}
+
+.search-bar input::placeholder{
+    color: #ffffff;
+}
+
+.search-bar input:focus{
+    background-color:rgba(0, 0, 0, 0.5);
+    border: #0a0a0a solid 2px;
+    color: #ffffff;
+}
+/*.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }*/
+/* Add a black background color to the top navigation */
