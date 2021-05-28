@@ -1,0 +1,30 @@
+.hidden{
+    display: none;
+}
+
+.test{
+    width: 13%;
+    display: inline;
+}
+
+textarea{
+    width: 90%;
+    min-height: 400px;
+}
+
+input{
+    width: 90%;
+}
+
+.ingredient-list{
+    margin: auto;
+}
+
+.ingredient-name{
+    width: 40%;
+    display: inline;
+}
+
+.form-upload{
+    margin: auto;
+}

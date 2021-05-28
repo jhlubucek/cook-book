@@ -1,6 +1,21 @@
-.example-wrapper { text-align: center; margin: auto; max-width: 800px; width: 95%;  font: 18px/1.5 sans-serif;}
+.example-wrapper {
+    text-align: center;
+    margin: auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+    padding: 30px 20px;
+}
 
-.title { text-align: center; margin: auto; width: 100%;  font: 18px/1.5 sans-serif; height: 500px;
+.title{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    font: 18px/1.5 sans-serif;
+}
+
+.title-img {
+    height: 500px;
     background-color: #ccffff;
     background-size: cover;
     background-attachment: fixed;
@@ -12,6 +27,12 @@
 .title h1 {
     color: #030303;
     padding-top: 150px;
+}
+
+.title-color {
+    background-color: #8d7806;
+    height: 250px;
+
 }
 
 .search-bar {
@@ -36,5 +57,12 @@
     border: #0a0a0a solid 2px;
     color: #ffffff;
 }
+
+.bg-gray{
+ background: #6E6E6E;
+}
+
+
+
 /*.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }*/
 /* Add a black background color to the top navigation */
