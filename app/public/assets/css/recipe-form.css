@@ -28,3 +28,11 @@ input{
 .form-upload{
     margin: auto;
 }
+
+.categories-form label{
+    display: inline;
+}
+
+.categories-form input {
+    width: 20px;
+}

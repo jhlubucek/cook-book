@@ -19,14 +19,13 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    // /**
-    //  * @return Recipe[] Returns an array of Recipe objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Recipe[] Returns an array of Recipe objects
+      */
+    public function findByNameLike($value)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.name LIKE :val')
             ->setParameter('val', $value)
             ->orderBy('r.id', 'ASC')
             ->setMaxResults(10)
@@ -34,17 +33,32 @@ class RecipeRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Recipe
+    /**
+     * @param $value
+     * @param array $ids
+     * @return Recipe[] Returns an array of Recipe objects
+     */
+    public function findByNameAndIdIn($value, array $ids): array
+    {
+        $query = $this->createQueryBuilder('r');
+        $result =  $query->select('r')
+            ->add('where', $query->expr()->in('r.id', $ids));
+        $result = $result->andWhere('r.name Like :val')
+            ->setParameter('val', $value)
+            ->orderBy('r.id', 'ASC')
+            ->getQuery();
+
+        return $result->getResult();
+    }
+
+    public function findOneById($value): ?Recipe
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

@@ -19,32 +19,30 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    // /**
-    //  * @return Category[] Returns an array of Category objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+     /**
+      * @return Category[] Returns an array of Category objects
+      */
+    public function findByRecipeIdd($users) {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb
+            ->select('c')
+            ->from('App\Entity\RecipeHasCategory', 'r')
+            ->join('App\Entity\Category', 'c', \Doctrine\ORM\Query\Expr\Join::WITH , 'r.category_id = c.id')
+            ->where('r.recipe_id = :val')
+            ->setParameter('val', $users)
+            ->orderBy('c.id', 'ASC');;
 
-    /*
-    public function findOneBySomeField($value): ?Category
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findOneById($value): ?Category
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

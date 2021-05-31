@@ -1,0 +1,33 @@
+.recipe {
+    border-radius: 5px;
+    float: left;
+    width: 49%;
+    padding: 10px;
+    margin: 0.5%;
+    background: #F5F5F5;
+    color: black;
+}
+
+.recipe img{
+    max-width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Clear floats after the columns */
+.row {
+    max-width: 720px;
+    margin: 0 auto 60px;
+}
+
+@media screen and (max-width: 800px) {
+    .recipe {width: 99%;}
+}

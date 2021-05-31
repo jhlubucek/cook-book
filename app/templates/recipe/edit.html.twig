@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}new recipe{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/recipe-form.css') }}">
+{% endblock %}
+{% block body %}
+    <script>
+        var counter = {{ ingredientsN }};
+        function myFunction() {
+            if (counter <= 10) {
+                var id1 = "recipe_form_ingredients_ingredient_name_".concat(counter.toString())
+                var id2 = "recipe_form_ingredients_ingredient_amount_".concat(counter.toString())
+                var id3 = "recipe_form_ingredients_ingredient_unit_".concat(counter.toString())
+                var x = document.getElementById(id1);
+                x.style.display = "inline";
+                x = document.getElementById(id2);
+                x.style.display = "inline";
+                x = document.getElementById(id3);
+                x.style.display = "inline";
+                counter++;
+            }if (counter >= 11){
+                var btn = document.getElementById("add_ingredient");
+                btn.style.display = "none";
+            }
+        }
+    </script>
+
+    <div class="title-color title">
+        <h1>fakt cool titulek</h1>
+    </div>
+    <div style="background: #d9d9d1">
+        <div class="example-wrapper content-blok" >
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_row(form.categories.categories) }}
+            </div>
+        </div>
+    </div>
+    <div style="background: #b7b7b7">
+        <div class="example-wrapper content-blok">
+            <div class="form-group">
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.text) }}
+                {{ form_row(form.image) }}
+            </div>
+        </div>
+    </div>
+    <div style="background: #d9d9d1">
+        <div class="example-wrapper content-blok">
+            <h2>ingredience</h2>
+            <div class="ingredient-list form-group">
+                {{ form_widget(form.ingredients.ingredient_name_1) }}
+                {{ form_widget(form.ingredients.ingredient_amount_1) }}
+                {{ form_widget(form.ingredients.ingredient_unit_1) }}
+                {{ form_errors(form.ingredients.ingredient_name_1) }}
+                {{ form_errors(form.ingredients.ingredient_amount_1) }}
+                {{ form_widget(form.ingredients.ingredient_name_2) }}
+                {{ form_widget(form.ingredients.ingredient_amount_2) }}
+                {{ form_widget(form.ingredients.ingredient_unit_2) }}
+                {{ form_errors(form.ingredients.ingredient_name_2) }}
+                {{ form_errors(form.ingredients.ingredient_amount_2) }}
+                {{ form_widget(form.ingredients.ingredient_name_3) }}
+                {{ form_widget(form.ingredients.ingredient_amount_3) }}
+                {{ form_widget(form.ingredients.ingredient_unit_3) }}
+                {{ form_errors(form.ingredients.ingredient_name_3) }}
+                {{ form_errors(form.ingredients.ingredient_amount_3) }}
+                {{ form_widget(form.ingredients.ingredient_name_4) }}
+                {{ form_widget(form.ingredients.ingredient_amount_4) }}
+                {{ form_widget(form.ingredients.ingredient_unit_4) }}
+                {{ form_errors(form.ingredients.ingredient_name_4) }}
+                {{ form_errors(form.ingredients.ingredient_amount_4) }}
+                {{ form_widget(form.ingredients.ingredient_name_5) }}
+                {{ form_widget(form.ingredients.ingredient_amount_5) }}
+                {{ form_widget(form.ingredients.ingredient_unit_5) }}
+                {{ form_errors(form.ingredients.ingredient_name_5) }}
+                {{ form_errors(form.ingredients.ingredient_amount_5) }}
+                {{ form_widget(form.ingredients.ingredient_name_6) }}
+                {{ form_widget(form.ingredients.ingredient_amount_6) }}
+                {{ form_widget(form.ingredients.ingredient_unit_6) }}
+                {{ form_errors(form.ingredients.ingredient_name_6) }}
+                {{ form_errors(form.ingredients.ingredient_amount_6) }}
+                {{ form_widget(form.ingredients.ingredient_name_7) }}
+                {{ form_widget(form.ingredients.ingredient_amount_7) }}
+                {{ form_widget(form.ingredients.ingredient_unit_7) }}
+                {{ form_errors(form.ingredients.ingredient_name_7) }}
+                {{ form_errors(form.ingredients.ingredient_amount_7) }}
+                {{ form_widget(form.ingredients.ingredient_name_8) }}
+                {{ form_widget(form.ingredients.ingredient_amount_8) }}
+                {{ form_widget(form.ingredients.ingredient_unit_8) }}
+                {{ form_errors(form.ingredients.ingredient_name_8) }}
+                {{ form_errors(form.ingredients.ingredient_amount_8) }}
+                {{ form_widget(form.ingredients.ingredient_name_9) }}
+                {{ form_widget(form.ingredients.ingredient_amount_9) }}
+                {{ form_widget(form.ingredients.ingredient_unit_9) }}
+                {{ form_errors(form.ingredients.ingredient_name_9) }}
+                {{ form_errors(form.ingredients.ingredient_amount_9) }}
+                {{ form_widget(form.ingredients.ingredient_name_10) }}
+                {{ form_widget(form.ingredients.ingredient_amount_10) }}
+                {{ form_widget(form.ingredients.ingredient_unit_10) }}
+                {{ form_errors(form.ingredients.ingredient_name_10) }}
+                {{ form_errors(form.ingredients.ingredient_amount_10) }}
+            </div>
+            <a id="add_ingredient" class="btn btn-secondary" style="margin-top: 10px; margin-bottom: 10px" onclick="myFunction()">add ingredient</a><br>
+            {{ form_widget(form.save) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

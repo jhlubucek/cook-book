@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}new recipe{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/simple-table.css') }}">
+{% endblock %}
+{% block body %}
+    <script>
+        var counter = 0;
+        function myFunction() {
+            if (counter <= 10) {
+                counter++;
+                var id1 = "recipe_form_ingredient".concat(counter.toString())
+                var id2 = "recipe_form_ingredient_count".concat(counter.toString())
+                var id3 = "recipe_form_ingredient_unit".concat(counter.toString())
+                var x = document.getElementById(id1);
+                x.style.display = "inline";
+                x = document.getElementById(id2);
+                x.style.display = "inline";
+                x = document.getElementById(id3);
+                x.style.display = "inline";
+            }
+        }
+    </script>
+
+    <div class="title-color title">
+        <h1>{{ recipe.name }}</h1>
+    </div>
+    <div style="background: #d9d9d1">
+        <div class="example-wrapper content-blok">
+            <span>categories: </span><br>
+            {% for c in categories %}
+                [{{ c.name }}]
+            {% endfor %}
+        </div>
+    </div>
+    <div style="background: #ffffff;">
+        <img src="{{ asset('uploads/' ~ recipe.getImage) }}" alt="Girl in a jacket" height="400" class="center">
+        <h3 class='center'>instructions</h3>
+        <div class="example-wrapper content-blok"  style="max-width: 500px; white-space: pre-wrap; text-align: left">
+            <p>{{ recipe.text }}</p>
+        </div>
+        <div class="example-wrapper content-blok">
+            <table>
+                <span class="table-name">ingredients</span>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                {% for i in ingredients %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.amount }}</td>
+                        <td>{{ i.unit }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if canEdit %}
+        <a class="center btn btn-primary" href="{{ path('recipe_edit' , {id: recipe.id}) }}">edit</a>
+        <a class="center btn btn-danger" onclick='return confirm("Are you sure?")' href="{{ path('recipe_delete' , {id: recipe.id}) }}">delete</a>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

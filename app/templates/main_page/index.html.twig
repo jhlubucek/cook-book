@@ -2,75 +2,45 @@
 
 {% block title %}Hello MainPageController!{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/recipes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/recipe-form.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="title-img title">
-        <h1>fakt cool titulek</h1>
+        <h1>Online kuchařka</h1>
+        {{ form_start(form) }}
+{#        <form>#}
         <div class="input-group search-bar">
-            <input type="text" class="form-control" placeholder="search recipe" >
+{#            <input type="text" class="form-control" placeholder="search recipe" >#}
+            {{ form_widget(form.query) }}
             <div class="input-group-append">
-                <button class="btn btn-secondary" type="button">search</button>
+                {{ form_widget(form.search) }}
+{#                <button class="btn btn-secondary" type="button">search</button>#}
             </div>
         </div>
+        <div class="form-group categories" style="color: white; background-color:rgba(0, 0, 0, 0.5); width: 500px; margin: auto">
+            {{ form_row(form.categories.categories) }}
+            <div class="secondary-search-bar">
+            {{ form_row(form.ingredient) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+{#        </form>#}
     </div>
 
     <div class="example-wrapper" style="background: #d9d9d1">
+        <div class="row">
+                {% for p in recipes %}
+            <div class="recipe">
+                <a href="{{ path('recipe_detail' , {id: p.id}) }}">
 
-        <ul>
-            <li>Your controller at <code><a href="{{ '/home/pi/projects/cook-book/app/src/Controller/MainPageController.php'|file_link(0) }}">src/Controller/MainPageController.php</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/pi/projects/cook-book/app/templates/main_page/index.html.twig'|file_link(0) }}">templates/main_page/index.html.twig</a></code></li>
-        </ul>
+                <img src="{{ asset('uploads/' ~ p.getImage) }}" alt="Girl in a jacket" height="200">
+                        <div>{{ p.getName }}</div>
+                </a>
+                    </div>
+                {% endfor %}
+        </div>
     </div>
 {% endblock %}

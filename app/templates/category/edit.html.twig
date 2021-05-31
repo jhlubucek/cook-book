@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}new recipe{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/table.css') }}">
+{% endblock %}
+{% block body %}
+    <script>
+        var counter = 0;
+        function myFunction() {
+            if (counter <= 10) {
+                counter++;
+                var id1 = "recipe_form_ingredient".concat(counter.toString())
+                var id2 = "recipe_form_ingredient_count".concat(counter.toString())
+                var id3 = "recipe_form_ingredient_unit".concat(counter.toString())
+                var x = document.getElementById(id1);
+                x.style.display = "inline";
+                x = document.getElementById(id2);
+                x.style.display = "inline";
+                x = document.getElementById(id3);
+                x.style.display = "inline";
+            }
+        }
+    </script>
+
+    <div class="title-color title">
+        <h1>fakt cool titulek</h1>
+    </div>
+
+    <div class="example-wrapper content-blok" style="background: #b7b7b7">
+        {% if  forms is empty %}
+                <h2>you don't have any categories :(</h2>
+        {% endif %}
+        {% for f in forms %}
+        {{ form_start(f) }}
+        <div class="form-group" style="display: inline; ">
+            {{ form_label((f.name)) }}
+            {{ form_widget(f.name, {'attr': {'class': 'form-control', 'style': 'display: inline; width: 50%'}}) }}
+            {{ form_errors(f.name) }}
+        </div>
+        {{ form_widget(f.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(f) }}
+        {% endfor %}
+    </div>
+
+{% endblock %}

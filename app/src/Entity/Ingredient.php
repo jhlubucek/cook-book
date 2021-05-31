@@ -35,7 +35,7 @@ class Ingredient
     /**
      * @ORM\Column(type="integer")
      */
-    private $recipeId;
+    private $recipe_id;
 
     public function getId(): ?int
     {
@@ -80,12 +80,12 @@ class Ingredient
 
     public function getRecipeId(): ?int
     {
-        return $this->recipeId;
+        return $this->recipe_id;
     }
 
-    public function setRecipeId(int $recipeId): self
+    public function setRecipeId(int $recipe_id): self
     {
-        $this->recipeId = $recipeId;
+        $this->recipe_id = $recipe_id;
 
         return $this;
     }

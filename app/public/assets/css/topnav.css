@@ -8,7 +8,7 @@
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
+.topnav a , .topnav span{
     float: left;
     color: #eaeaea;
     text-align: center;
@@ -26,5 +26,20 @@
 /* Add a color to the active/current link */
 .topnav a.active {
     background-color: #04AA6D;
+    color: white;
+}
+
+.topnav a.darker , span.darker{
+    background-color: #002118;
+    color: white;
+}
+
+.topnav a.dark , span.dark{
+    background-color: #003526;
+    color: white;
+}
+
+.topnav a.darkish , span.darkish{
+    background-color: #014533;
     color: white;
 }

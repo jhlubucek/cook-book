@@ -22,11 +22,6 @@ class Category
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $categoryTypeId;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -42,11 +37,6 @@ class Category
         $this->name = $name;
 
         return $this;
-    }
-
-    public function getCategoryTypeId(): ?int
-    {
-        return $this->categoryTypeId;
     }
 
     public function setCategoryTypeId(int $categoryTypeId): self

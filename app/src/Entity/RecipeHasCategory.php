@@ -20,12 +20,12 @@ class RecipeHasCategory
     /**
      * @ORM\Column(type="integer")
      */
-    private $categoryId;
+    private $category_id;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $recipeId;
+    private $recipe_id;
 
     public function getId(): ?int
     {
@@ -34,24 +34,24 @@ class RecipeHasCategory
 
     public function getCategoryId(): ?int
     {
-        return $this->categoryId;
+        return $this->category_id;
     }
 
-    public function setCategoryId(int $categoryId): self
+    public function setCategoryId(int $category_id): self
     {
-        $this->categoryId = $categoryId;
+        $this->category_id = $category_id;
 
         return $this;
     }
 
     public function getRecipeId(): ?int
     {
-        return $this->recipeId;
+        return $this->recipe_id;
     }
 
-    public function setRecipeId(int $recipeId): self
+    public function setRecipeId(int $recipe_id): self
     {
-        $this->recipeId = $recipeId;
+        $this->recipe_id = $recipe_id;
 
         return $this;
     }

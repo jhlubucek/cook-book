@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Regex;
 use function Sodium\add;
 
@@ -31,21 +33,35 @@ class RecipeFormType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[A-Za-z0-9áčďéěíňóřšťůúýžÁČĎÉĚÍŇÓŘŠŤŮÚÝŽ\-]{2,20}$/',
-                        'message' => "2-20 characters. Only letters numbers and -. "
+                        'pattern' => '/^[A-Za-z0-9áčďéěíňóřšťůúýžÁČĎÉĚÍŇÓŘŠŤŮÚÝŽ\- ]{2,20}$/',
+                        'message' => "2-20 characters"
                     ]),
                 ]
             ])
             ->add('text', TextareaType::class, [
                 'attr' => ['class' => 'form-control'],
+                'constraints' => [
+
+                ]
             ])
             ->add('image', FileType::class,[
                 'attr' => ['class' => 'form-upload'],
                 'mapped' => false,
-                'label' => 'select image: '
+                'label' => 'select image: ',
+                'required' => $options['require_image'],
+            ])
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
+            ])
+            ->add('ingredients', IngredientsFormType::class, [
+                'mapped' => false,
+                'ingredients_data' => $options['ingredients_data'],
+            ])
+            ->add('categories', CategoriesFormType::class, [
+                'mapped' => false,
+                'category_options' => $options['category_options'],
+                'category_selected' => $options['category_selected'],
             ]);
-
-        $this->buildIngredients($builder);
 
     }
 
@@ -53,6 +69,10 @@ class RecipeFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Recipe::class,
+            'category_options' => [],
+            'category_selected' => [],
+            'ingredients_data' => [],
+            'require_image' => true,
         ]);
     }
 
@@ -83,5 +103,9 @@ class RecipeFormType extends AbstractType
                     'required' => false,
                 ]);
         }
+    }
+
+    public function extractIngredientsFromForm(){
+
     }
 }
