@@ -15,7 +15,6 @@ class SearchFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->setMethod('GET')
             ->add('query', TextType::class, [
                 'attr' => ['class' => 'form-control', 'placeholder'=> 'search recipe'],
                 'required'=>false,

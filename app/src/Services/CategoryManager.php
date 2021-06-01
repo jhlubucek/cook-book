@@ -43,11 +43,20 @@ class CategoryManager
         }
     }
 
-    public function getAllCategories(){
+    public function getAllCategoriesByName(){
         $categories = $this->categoryRepository->findAll();
         $names = [];
         foreach ($categories as $category){
             $names[$category->getName()] = $category->getId();
+        }
+        return $names;
+    }
+
+    public function getAllCategoriesById(){
+        $categories = $this->categoryRepository->findAll();
+        $names = [];
+        foreach ($categories as $category){
+            $names[$category->getId()] = $category->getName();
         }
         return $names;
     }

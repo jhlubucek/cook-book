@@ -28,6 +28,9 @@ class CategoriesFormType extends AbstractType
                 'required' => false,
             ]
         );
+
+        dump($this->createChoiceAttr($options['category_selected']));
+        dump($options['category_options']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -39,11 +42,11 @@ class CategoriesFormType extends AbstractType
     }
 
     private function createChoiceAttr($categories){
+        dump($categories);
         $result = [];
         foreach ($categories as $category){
             $result[$category] =  ['checked' => 'checked'];
         }
-        dump($result);
         return $result;
     }
 }

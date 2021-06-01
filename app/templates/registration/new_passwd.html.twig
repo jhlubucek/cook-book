@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Passwd{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
@@ -11,14 +11,12 @@
     </div>
 <div class="example-wrapper content-blok form-group">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-    {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+    {{ form_start(form) }}
+        {{ form_row(form.plainPassword, {
             label: 'Password'
         }) }}
 
         <button type="submit" class="btn btn-primary">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(form) }}
 </div>
 {% endblock %}

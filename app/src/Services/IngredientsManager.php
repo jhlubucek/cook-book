@@ -30,7 +30,6 @@ class IngredientsManager
 
     private function deleteIngredients($recipe){
         $oldIngredients = $this->ingredientRepository->findByRecipeId($recipe->getId());
-        dump($oldIngredients);
         foreach ($oldIngredients as $ingredient){
             $this->entityManager->remove($ingredient);
             $this->entityManager->flush();

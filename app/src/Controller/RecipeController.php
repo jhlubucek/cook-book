@@ -77,7 +77,7 @@ class RecipeController extends BaseController
     public function index(Request $request): Response
     {
         $recipe = new Recipe();
-        $form = $this->createForm(RecipeFormType::class, $recipe, ['category_options' => $this->categoryManager->getAllCategories()]);
+        $form = $this->createForm(RecipeFormType::class, $recipe, ['category_options' => $this->categoryManager->getAllCategoriesByName()]);
         $form->handleRequest($request);
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -106,26 +106,25 @@ class RecipeController extends BaseController
 
             $recipe->setImage($fileName);
             //todo
-            $recipe->setUserId(1);
+            $recipe->setUserId($this->getUser()->getId());
 
             $entityManager->persist($recipe);
             $entityManager->flush();
 
             $ingredients = [];
             $ingredientsData = $form->get('ingredients')->getData()['transformed'];
-            dump($ingredientsData);
             foreach ($ingredientsData as $data){
+                $unit = isset($data['unit']) ? $data['unit'] : " ";
                 $ingredient = new Ingredient();
                 $ingredient->setName($data['name']);
                 $ingredient->setAmount($data['amount']);
-                $ingredient->setUnit($data['unit']);
+                $ingredient->setUnit($unit);
                 $ingredient->setRecipeId($recipe->getId());
                 $ingredients[] = $ingredient;
             }
             $this->ingredientsManager->setNewIngredients($recipe, $ingredients);
 
             $categoriesData = $form->get('categories')->get('categories')->getData();
-            dump($categoriesData);
             $categories = [];
             foreach ($categoriesData as $categoryId){
                 $category = new RecipeHasCategory();
@@ -161,8 +160,9 @@ class RecipeController extends BaseController
         }
 
 
+        dump($this->ingredientRepository->findByRecipeId($recipe->getId()));
         $form = $this->createForm(RecipeFormType::class, $recipe, [
-            'category_options' => $this->categoryManager->getAllCategories(),
+            'category_options' => $this->categoryManager->getAllCategoriesByName(),
             'category_selected' => $this->categoryManager->getCategories($recipe),
             'ingredients_data' => $this->ingredientRepository->findByRecipeId($recipe->getId()),
             'require_image' => false,
@@ -192,26 +192,25 @@ class RecipeController extends BaseController
 
 
             //todo
-            $recipe->setUserId(1);
+            $recipe->setUserId($this->getUser()->getId());
 
 //            $entityManager->persist($recipe);
             $entityManager->flush();
 
             $ingredients = [];
             $ingredientsData = $form->get('ingredients')->getData()['transformed'];
-            dump($ingredientsData);
             foreach ($ingredientsData as $data){
                 $ingredient = new Ingredient();
+                $unit = isset($data['unit']) ? $data['unit'] : " ";
                 $ingredient->setName($data['name']);
                 $ingredient->setAmount($data['amount']);
-                $ingredient->setUnit($data['unit']);
+                $ingredient->setUnit($unit);
                 $ingredient->setRecipeId($recipe->getId());
                 $ingredients[] = $ingredient;
             }
             $this->ingredientsManager->setNewIngredients($recipe, $ingredients);
 
             $categoriesData = $form->get('categories')->get('categories')->getData();
-            dump($categoriesData);
             $categories = [];
             foreach ($categoriesData as $categoryId){
                 $category = new RecipeHasCategory();

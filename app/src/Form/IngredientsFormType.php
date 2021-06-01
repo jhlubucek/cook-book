@@ -38,7 +38,7 @@ class IngredientsFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[A-Za-záčďéěíňóřšťůúýžÁČĎÉĚÍŇÓŘŠŤŮÚÝŽ\- ]{0,20}$/',
+                        'pattern' => '/^[A-Za-z0-9áčďéěíňóřšťůúýžÁČĎÉĚÍŇÓŘŠŤŮÚÝŽ\- ]{0,20}$/',
                         'message' => "0-20 characters. Only letters numbers and -. "
                     ]),
                 ]
@@ -130,11 +130,11 @@ class IngredientsFormType extends AbstractType
         dump($options['ingredients_data']);
         foreach ($options['ingredients_data'] as $key => $ingredient){
             $data['ingredient_name_'.($key + 1)] = $ingredient->getName();
-            $data['ingredient_amount_'.($key + 1)] = $ingredient->getAmount();
+            if (!empty($ingredient->getAmount()))
+                $data['ingredient_amount_'.($key + 1)] = $ingredient->getAmount();
             $data['ingredient_unit_'.($key + 1)] = $ingredient->getUnit();
         }
         $builder->setData($data);
-        dump($builder->getData());
     }
 
     public function configureOptions(OptionsResolver $resolver)

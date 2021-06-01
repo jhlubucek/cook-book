@@ -22,6 +22,9 @@ class MainPageController extends AbstractController
     private $ingredientRepository;
     private $categoryManager;
 
+    private static $NAME_VAR = "name";
+    private static $INGREDIENT_VAR = "ingredient";
+
     public function __construct(
         RecipeRepository $recipeRepository,
         CategoryRepository$categoryRepository,
@@ -42,51 +45,76 @@ class MainPageController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $form = $this->createForm(SearchFormType::class, null, ['category_options' => $this->categoryManager->getAllCategories()]);
 
-        $this->addFlash('success', 'Updated.');
+        dump($_GET);
+        dump($request->get("kokos_koko"));
+        $allCategoriesByName = $this->categoryManager->getAllCategoriesByName();
+        $searchCategories = [];
+        $selectedCategories = [];
+        foreach ($allCategoriesByName as $name => $id){
+            $urlName = str_replace(" ", "_", $name);
+            if ($request->get($urlName) == 1){
+                $searchCategories[] = $id;
+                $selectedCategories[] = $name;
+            }
+        }
+        $searchName = $request->get(self::$NAME_VAR);
+        $searchIngredient = $request->get("ingredient");
 
+
+
+        dump($searchName,$searchIngredient, $searchCategories, $selectedCategories);
+
+
+        $form = $this->createForm(SearchFormType::class, null, [
+            'category_options' => $this->categoryManager->getAllCategoriesByName(),
+            'category_selected' => $selectedCategories,
+            'data' => ['query' => $searchName, 'ingredient' => $searchIngredient]
+        ]);
         $form->handleRequest($request);
-        dump($form);
-        dump($form->isSubmitted());
-        if ($form->isSubmitted() && $form->isValid()) {
-            $query = $form->get('query')->getData();
-            $categories = $form->get('categories')->get('categories')->getData();
-            $ingredient = $form->get('ingredient')->getData();
-            $query = is_null($query) ? "%%" : "%$query%";
-            dump($query);
-            dump($categories);
-            dump($ingredient);
-            if ($categories == [] && is_null($ingredient)){
-                $recipesAll = $this->recipeRepository->findByNameLike('%' . "$query" . "%");
-            }else {
-                if (!$categories == []) {
-                    $filter = $this->recipeHasCategoryRepository->findIdsByCategoryId($categories);
-                } else if (!is_null($ingredient)) {
-                    $filter = $this->ingredientRepository->findRecipeIdByNameLike('%' . $ingredient . '%');
-                } else {
-                    $categoryFilter = $this->recipeHasCategoryRepository->findIdsByCategoryId($categories);
-                    $ingredientFilter = $this->ingredientRepository->findRecipeIdByNameLike('%' . $ingredient . '%');
-                    $filter = array_intersect($categoryFilter, $ingredientFilter);
 
-                }
-                $recipesAll = $this->recipeRepository->findByNameAndIdIn('%' . $query . "%", $filter);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $name = $form->get('query')->getData();
+            $categoriesForm = $form->get('categories')->get('categories')->getData();
+            $ingredient = $form->get('ingredient')->getData();
+
+            $allCategoriesById = $this->categoryManager->getAllCategoriesById();
+
+            $params = [];
+
+            $params[self::$NAME_VAR] = $name;
+            $params[self::$INGREDIENT_VAR] = $ingredient;
+            foreach ($categoriesForm as $id){
+                $params[$allCategoriesById[$id]] = "1";
             }
 
-
-//            $categoryFilter = $this->recipeHasCategoryRepository->findIdsByCategoryId($categories);
-//            $ingredientFilter = $this->ingredientRepository->findRecipeIdByNameLike('%'. $ingredient .'%');
-//
-//            $filter = array_intersect($categoryFilter, $ingredientFilter);
-//            dump($categoryFilter);
-//            dump($ingredientFilter);
-//            dump($filter);
-//            dump($this->recipeRepository->findByNameAndIdIn('%' . $query . "%", [92,93]));
-//            $recipesAll = $this->recipeRepository->findByNameLike('%' . "$query" . "%");
-        }else{
-            $recipesAll = $this->recipeRepository->findAll();
+            dump($form->getData());
+            return  $this->redirectToRoute('main_page', $params);
         }
 
+        dump(empty($searchCategories));
+        dump(empty($searchIngredient));
+
+        if (empty($searchCategories) && empty($searchIngredient)){
+            $recipesAll = $this->recipeRepository->findByNameLike('%' . "$searchName" . "%");
+        }else {
+            if (empty($searchIngredient)) {
+                $filter = $this->recipeHasCategoryRepository->findIdsByCategoryId($searchCategories);
+            } else if (empty($searchCategories)) {
+                $filter = $this->ingredientRepository->findRecipeIdByNameLike('%' . $searchIngredient . '%');
+            } else {
+                $categoryFilter = $this->recipeHasCategoryRepository->findIdsByCategoryId($searchCategories);
+                $ingredientFilter = $this->ingredientRepository->findRecipeIdByNameLike('%' . $searchIngredient . '%');
+                $filter = array_intersect($categoryFilter, $ingredientFilter);
+                dump($categoryFilter);
+                dump($ingredientFilter);
+                dump($filter);
+
+            }
+            $recipesAll = $this->recipeRepository->findByNameAndIdIn('%' . $searchName . "%", $filter);
+        }
+
+//        $recipesAll = $this->recipeRepository->findByNameLike('%' . "" . "%");
 
 
 

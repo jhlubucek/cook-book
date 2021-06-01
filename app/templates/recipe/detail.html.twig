@@ -31,7 +31,7 @@
         <div class="example-wrapper content-blok">
             <span>categories: </span><br>
             {% for c in categories %}
-                [{{ c.name }}]
+                <a href="{{ path('main_page') }}?{{ c.getName }}=1">[{{ c.name }}]</a>
             {% endfor %}
         </div>
     </div>
@@ -45,9 +45,9 @@
             <table>
                 <span class="table-name">ingredients</span>
                 <tr>
-                    <th>Company</th>
-                    <th>Contact</th>
-                    <th>Country</th>
+                    <th>name</th>
+                    <th>amount</th>
+                    <th>unit</th>
                 </tr>
                 {% for i in ingredients %}
                     <tr>
