@@ -1,4 +1,4 @@
-# Smart planter - planter_web
+# Online cook-book
 
 This is a template for docker run symphony app
 
@@ -12,15 +12,15 @@ projec can be run with docker-compose with simple command
 ```bash
 docker-compose up -d --build
 ```
-
-then go to the container
+### composer instalation might be needed
+go to the container
 ```bash
 docker exec -it [docker id/name] bash
 ```
 
 then create symfony skeleton
 ```bash
-cd.. && composer create-project symfony/website-skeleton app
+composer install
 ```
 
 ## Contributing
